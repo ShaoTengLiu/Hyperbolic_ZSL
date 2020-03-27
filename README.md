@@ -51,5 +51,27 @@ CUDA_VISIBLE_DEVICES=1 python devise_hype.py \
     --dimension 300
 ```
 
+or
+
+```shell
+bash script_hype.sh
+```
+
 * model_path: the folder to save models
 * loss_path: the .jpg tp save loss curve
+
+To run DeViSE in Euclidean space via
+
+```shell
+CUDA_VISIBLE_DEVICES=2 python devise.py \
+    --word_model glove \
+    --model_folder model_path \
+    --loss_path loss_path \
+    --dimension 600
+```
+
+or
+
+```shell
+bash script.sh
+```
