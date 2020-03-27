@@ -39,3 +39,17 @@ conda env create -f environment.yml
 
 ### Data Preparation
 Generate data and put them in these folders:
+
+### Quick Start
+One can run our code via
+
+```shell
+CUDA_VISIBLE_DEVICES=1 python devise_hype.py \
+    --word_model poincare \
+    --model_folder model_path \
+    --loss_path loss_path \
+    --dimension 300
+```
+
+* model_path: the folder to save models
+* loss_path: the .jpg tp save loss curve
