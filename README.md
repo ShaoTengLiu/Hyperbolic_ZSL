@@ -29,7 +29,8 @@ Hyperbolic_ZSL/code is the default root directory.
 * PyTorch version 1.0 or higher
 * At least one GPU with adequate memory
 * python 3.7 (python 2 may be possible with modifications)
-Use requirements.txt for quick start
+
+Use environment.yml for quick start
 
 ```
 conda env create -f environment.yml
