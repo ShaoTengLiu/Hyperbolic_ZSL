@@ -121,14 +121,6 @@ def main():
 		avg_loss = 0
 		f1       = 0
 
-		# # tensor shuffle
-		# shuffle_index       = torch.randperm(len(train_img_mat))
-		# train_img_mat_sf    = train_img_mat
-		# train_words_embd_sf = train_words_embd
-		# for i in range(len(train_img_mat)): 
-		# train_img_mat_sf[i]    = train_img_mat[shuffle_index[i]]-1
-		# train_words_embd_sf[i] = train_words_embd[shuffle_index[i]]-1
-
 		for j in range(0, len(train_img_mat), args.batch_size): 
 			total_step        += 1
 			batch_train_img    = train_img_mat[j: j+args.batch_size, :]
@@ -146,6 +138,7 @@ def main():
 			loss.backward()
 			optimizer.step()
 
+			# TODO code for f1 score is temporarily commented
 			# f1 = f1_score(batch_train_words.cpu().detach().numpy(), img_tranf.cpu().detach().numpy().round(), average='macro')
 			# f1s.append(f1)
 			# avg_f1 = np.average(f1s) # running average
