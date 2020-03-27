@@ -17,10 +17,14 @@ import json
 class Image_Transformer(nn.Module):
     def __init__(self, dimension):
         super(Image_Transformer,self).__init__()
-        self.fc1 = nn.Linear(2048,dimension)
+        self.fc1 = nn.Linear(2048,1024)
+        self.relu = nn.ReLU(inplace=True)
+        self.fc2 = nn.Linear(1024,dimension)
 
     def forward(self,x):
         x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
         return x
 
 class MyHingeLoss(torch.nn.Module):
@@ -30,18 +34,7 @@ class MyHingeLoss(torch.nn.Module):
         self.M = torch.randn((dimension,dimension), requires_grad=True)
         self.margin = margin
 
-    # def forward(self, output, target):
-    #     for i in range(len(output)):
-    #         v_image = output[i]
-    #         t_label = target[i]
-    #         j = randint(0, len(output)-1)
-    #         while j == i:
-    #             j = randint(0, len(output)-1)
-    #         t_j = target[j]
-    #         cos = nn.CosineSimilarity(dim=0, eps=1e-6)
-    #         loss = torch.relu( self.margin - cos(t_label, v_image) + cos(t_j, v_image) )
-    #     return loss
-
+    # TODO the correct implement should set compare_num to a large number
     def forward_val(self, output, target):
         cos = nn.CosineSimilarity(dim=0, eps=1e-6)
         loss = 0
@@ -56,6 +49,7 @@ class MyHingeLoss(torch.nn.Module):
                     t_j = target[j]
                     loss += torch.relu( self.margin - cos(t_label, v_image) + cos(t_j, v_image) )
         return loss / count
+
     def forward_train(self, output, target):
         for i in range(len(output)):
             v_image = output[i]

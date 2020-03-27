@@ -1,8 +1,4 @@
 import sys
-fudan_hype = r'/home/jingjing/lst/Projects/Hyperbolic/'
-fudan_pe = r'/home/jingjing/lst/NLP/Word_Embedding/poincare-embeddings'
-sys.path.append(fudan_hype)
-sys.path.append(fudan_pe)
 import json
 import numpy as np
 import torch
@@ -32,19 +28,15 @@ cos = nn.CosineSimilarity(dim=0, eps=1e-6)
 class Image_Transformer(nn.Module):
     def __init__(self, dimension):
         super(Image_Transformer,self).__init__()
-        # self.fc1 = MobiusLinear(2048, 1024)
-        # self.fc2 = MobiusLinear(1024, dimension)
-        self.fc1 = MobiusLinear(2048, dimension)
-        # self.fc2 = MobiusLinear(512, dimension)
-        # self.fc3 = MobiusLinear(128, dimension)
+        self.fc1 = MobiusLinear(2048, 1024)
+        self.mobius_relu = pm.mobius_fn_apply(F.relu, x)
+        self.fc2 = MobiusLinear(1024, dimension)
 
     def forward(self,x):
         # x = x / (1 + self.para.norm())
         x = self.fc1(x)
-        # x = pm.mobius_fn_apply(F.relu, x)
-        # x = self.fc2(x)
-        # x = pm.mobius_fn_apply(F.relu, x)
-        # x = self.fc3(x)
+        x = self.mobius_relu(x)
+        x = self.fc2(x)
         return x
 
 class MyHingeLoss(torch.nn.Module):
@@ -52,6 +44,7 @@ class MyHingeLoss(torch.nn.Module):
         super(MyHingeLoss, self).__init__()
         self.margin = margin
 
+    # TODO the correct implement should set compare_num to a large number
     # def forward(self, output, target):
     #     loss = 0
     #     compare_num = 2
@@ -79,9 +72,8 @@ class MyHingeLoss(torch.nn.Module):
             while j == i:
                 j = randint(0, len(output)-1)
             t_j = target[j]
-            loss += torch.relu( self.margin + PM().distance(t_label, v_image) - PM().distance(t_j, v_image) )
-            # loss += torch.relu( self.margin - cos(t_label, v_image)*(1-abs(t_label.norm()-v_image.norm())) + cos(t_j, v_image)*(1-abs(t_j.norm()-v_image.norm())) )
-            # loss += torch.relu( self.margin - cos(t_label, v_image) + cos(t_j, v_image) )
+            loss += torch.relu( self.margin + \
+                            PM().distance(t_label, v_image) - PM().distance(t_j, v_image) )
         return loss / len(output)
 
 class MyHingeLoss_cos(torch.nn.Module):
@@ -118,7 +110,5 @@ class MyHingeLoss_cos(torch.nn.Module):
             while j == i:
                 j = randint(0, len(output)-1)
             t_j = target[j]
-            # loss += torch.relu( self.margin + PM().distance(t_label, v_image) - PM().distance(t_j, v_image) )
-            # loss += torch.relu( self.margin - cos(t_label, v_image)*(1-abs(t_label.norm()-v_image.norm())) + cos(t_j, v_image)*(1-abs(t_j.norm()-v_image.norm())) )
             loss += torch.relu( self.margin - cos(t_label, v_image) + cos(t_j, v_image) )
         return loss / len(output)
