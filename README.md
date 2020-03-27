@@ -3,7 +3,7 @@ This is the PyTorch implementation of paper: Hyperbolic Visual Embedding Learnin
 
 
 
-![framework](framework.png)
+![framework](framework.pdf)
 
 
 
