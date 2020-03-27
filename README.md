@@ -50,10 +50,6 @@ CUDA_VISIBLE_DEVICES=1 python devise_hype.py \
     --loss_path loss_path \
     --dimension 300
 ```
-or
-```shell
-bash script_hype.sh
-```
 
 * model_path: the folder to save models
 * loss_path: the .jpg tp save loss curve
@@ -67,10 +63,7 @@ CUDA_VISIBLE_DEVICES=2 python devise.py \
     --loss_path loss_path \
     --dimension 600
 ```
-or
-```shell
-bash script.sh
-```
 
 **Code refactoring is still continuing**
+
 **Complete version coming soon**
