@@ -1,0 +1,13 @@
+torch>=1.1.0
+numpy
+jpeg4py
+opencv-python
+scikit-image
+tqdm
+PyYAML
+absl-py>=0.4
+grpcio>=1.6.3
+tensorboardX
+torchnet
+catalyst==19.3rc0
+git+https://github.com/geoopt/geoopt.git

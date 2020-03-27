@@ -1,0 +1,12 @@
+pytest
+black
+readme2tex
+pytest-cov
+coveralls
+twine
+wheel
+sphinx
+seaborn
+pydocstyle
+pytest-html
+pylint

@@ -1,0 +1,32 @@
+language: python
+python:
+    - "3.6"
+
+env:
+  - PYTHON_VERSION=3.6 PYTORCH='pytorch' COVERAGE='--cov geoopt'
+  - PYTHON_VERSION=3.6 PYTORCH='pytorch-nightly' COVERAGE=''
+
+matrix:
+  allow_failures:
+    - env: PYTHON_VERSION=3.6 PYTORCH='pytorch-nightly' COVERAGE=''
+
+before_install:
+  - docker pull conda/miniconda3
+  - docker --version
+
+install:
+  - make docker
+  # Print conda details
+  - docker run --rm geoopt:latest bash -c "conda info -a"
+  # Print conda environment details
+  - docker run --rm geoopt:latest bash -c "conda list && pip freeze"
+  # install coverage if needed
+  - if [[ $COVERAGE ]]; then pip install -r requirements-dev.txt; fi
+
+script:
+  - make docker-test
+
+after_success:
+  - echo $(pwd)
+  - ls -la
+  - if [[ $COVERAGE ]]; then coveralls; fi
