@@ -2,13 +2,16 @@ name: poincare
 channels:
 - anaconda
 - pytorch
-- defaults
 dependencies:
-- python=3.6
+- python=3.7
+- numpy
 - nltk
+- time
 - scikit-learn
 - pytorch=1.0.0
 - pandas
 - h5py
 - cython
 - tqdm
+- json
+- matplotlib

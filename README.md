@@ -20,9 +20,9 @@ Tools for computation in Riemannian geometry are not developed by us. One can ex
 ### Using Our Code
 ```
 git clone git@github.com:ShaoTengLiu/Hyperbolic_ZSL.git
-cd Hyperbolic_ZSL
+cd Hyperbolic_ZSL/code
 ```
-Hyperbolic_ZSL is the root directory.
+Hyperbolic_ZSL/code is the default root directory.
 
 ### Environment Requirements
 * [anaconda](https://www.anaconda.com/distribution/) is recommended
