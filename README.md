@@ -1,5 +1,11 @@
-# Hyperbolic_ZSL
-Hyperbolic Visual Embedding Learning for Zero-Shot Recognition (CVPR 2020)
+# Hyperbolic ZSL
+This is the PyTorch implementation of paper: Hyperbolic Visual Embedding Learning for Zero-Shot Recognition (CVPR 2020)
+
+
+
+![framework](framework.png)
+
+
 
 Tools for computation in Riemannian geometry are not developed by us. One can extend his model to hyperbolic space with these tools. Thanks to these good repos.
 
