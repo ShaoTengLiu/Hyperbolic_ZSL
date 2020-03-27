@@ -1,4 +1,5 @@
 import sys
+sys.path.append('../../poincare-embeddings')
 import json
 import numpy as np
 import torch

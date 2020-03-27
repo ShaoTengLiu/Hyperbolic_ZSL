@@ -39,6 +39,10 @@ conda env create -f environment.yml
 
 ### Data Preparation
 Generate data and put them in these folders:
+* ../data/train/img: pretrained feature from ResNet of ImageNet
+* ../data/val/img: pretrained feature from ResNet of ImageNet
+* ../data/train/label: pretrained word embedding from chosen word model
+* ../data/val/label: pretrained word embedding from chosen word model
 
 ### Quick Start
 One can run our code via
