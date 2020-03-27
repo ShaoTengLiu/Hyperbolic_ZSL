@@ -9,10 +9,32 @@ This is the PyTorch implementation of paper: Hyperbolic Visual Embedding Learnin
 
 Tools for computation in Riemannian geometry are not developed by us. One can extend his model to hyperbolic space with these tools. Thanks to these good repos.
 
-hyrnn can be found in [hyrnn](https://github.com/ferrine/hyrnn)
+* hyrnn can be found in [hyrnn](https://github.com/ferrine/hyrnn)
 
-geoopt can be found in [geoopt](https://github.com/geoopt/geoopt)
+* geoopt can be found in [geoopt](https://github.com/geoopt/geoopt)
 
-poincare_glove can be found in [poincare_glove](https://github.com/alex-tifrea/poincare_glove)
+* poincare_glove can be found in [poincare_glove](https://github.com/alex-tifrea/poincare_glove)
 
-poincare-embeddings can be found in [poincare-embeddings](https://github.com/facebookresearch/poincare-embeddings)
+* poincare-embeddings can be found in [poincare-embeddings](https://github.com/facebookresearch/poincare-embeddings)
+
+### Using Our Code
+```
+git clone git@github.com:ShaoTengLiu/Hyperbolic_ZSL.git
+cd Hyperbolic_ZSL
+```
+Hyperbolic_ZSL is the root directory.
+
+### Environment Requirements
+* [anaconda](https://www.anaconda.com/distribution/) is recommended
+* PyTorch version 1.0 or higher
+* At least one GPU with adequate memory
+* python 3.7 (python 2 may be possible with modifications)
+Use requirements.txt for quick start
+
+```
+conda env create -f environment.yml
+```
+
+
+### Data Preparation
+Generate data and put them in these folders:
