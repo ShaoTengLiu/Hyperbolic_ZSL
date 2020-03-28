@@ -30,7 +30,7 @@ Hyperbolic_ZSL/code is the default root directory.
 * At least one GPU with adequate memory
 * python 3.7 (python 2 may be possible with modifications)
 
-Use environment.yml for quick start
+Use environment.yml for quick start.
 
 ```
 conda env create -f environment.yml
