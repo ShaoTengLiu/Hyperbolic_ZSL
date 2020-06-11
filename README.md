@@ -5,18 +5,6 @@ This is the PyTorch implementation of paper: Hyperbolic Visual Embedding Learnin
 
 ![framework](framework.png)
 
-
-
-Tools for computation in Riemannian geometry are not developed by us. One can extend his model to hyperbolic space with these tools. Thanks to these good repos.
-
-* hyrnn can be found in [hyrnn](https://github.com/ferrine/hyrnn)
-
-* geoopt can be found in [geoopt](https://github.com/geoopt/geoopt)
-
-* poincare_glove can be found in [poincare_glove](https://github.com/alex-tifrea/poincare_glove)
-
-* poincare-embeddings can be found in [poincare-embeddings](https://github.com/facebookresearch/poincare-embeddings)
-
 ### Using Our Code
 ```
 git clone git@github.com:ShaoTengLiu/Hyperbolic_ZSL.git
@@ -67,6 +55,17 @@ CUDA_VISIBLE_DEVICES=2 python devise.py \
     --loss_path loss_path \
     --dimension 600
 ```
+
+### Acknowledgement
+Tools for computation in Riemannian geometry are not developed by us. One can extend his model to hyperbolic space with these tools. Thanks to these good repos.
+
+* hyrnn can be found in [hyrnn](https://github.com/ferrine/hyrnn)
+
+* geoopt can be found in [geoopt](https://github.com/geoopt/geoopt)
+
+* poincare_glove can be found in [poincare_glove](https://github.com/alex-tifrea/poincare_glove)
+
+* poincare-embeddings can be found in [poincare-embeddings](https://github.com/facebookresearch/poincare-embeddings)
 
 **Code refactoring is still continuing**
 
