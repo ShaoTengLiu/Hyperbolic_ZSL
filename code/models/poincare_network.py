@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../../poincare-embeddings')
 import json
 import numpy as np
 import torch
@@ -23,6 +22,7 @@ from hype.poincare import PoincareManifold as PM
 from tqdm import tqdm
 import time
 
+sys.path.append('../../poincare-embeddings')
 cos = nn.CosineSimilarity(dim=0, eps=1e-6)
 
 # Neural Classifierwork
@@ -80,7 +80,7 @@ class MyHingeLoss(torch.nn.Module):
 class MyHingeLoss_cos(torch.nn.Module):
 
     def __init__(self, margin):
-        super(MyHingeLoss, self).__init__()
+        super(MyHingeLoss_cos, self).__init__()
         self.margin = margin
 
     # TODO the correct implement should set compare_num to a large number

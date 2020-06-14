@@ -17,7 +17,7 @@ import json
 class Image_Transformer(nn.Module):
     def __init__(self, dimension):
         super(Image_Transformer,self).__init__()
-        self.fc1 = nn.Linear(2048,1024)
+        self.fc1 = nn.Linear(2048, 1024)
         self.relu = nn.ReLU(inplace=True)
         self.fc2 = nn.Linear(1024,dimension)
 

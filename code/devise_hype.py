@@ -1,8 +1,4 @@
 import sys
-fudan_hype = r'/home/jingjing/lst/Projects/Hyperbolic/'
-fudan_pe   = r'/home/jingjing/lst/NLP/Word_Embedding/poincare-embeddings'
-sys.path.append(fudan_hype)
-sys.path.append(fudan_pe)
 import os
 import json
 import numpy as np
@@ -29,6 +25,8 @@ import time
 import argparse
 
 from models.poincare_network import Image_Transformer, MyHingeLoss
+
+sys.path.append('../poincare-embeddings')
 
 def parse_option(): 
 
@@ -96,8 +94,8 @@ def set_model(args):
 	return model, criterion
 
 def set_optimizer(args,model): 
-	optimizer = torch.optim.Adam(model.parameters(), lr=0.002)
-	# optimizer = radam_.RiemannianAdam(model.parameters(), lr=0.01, stabilize=10)
+	# optimizer = torch.optim.Adam(model.parameters(), lr=0.002)
+	optimizer = radam_.RiemannianAdam(model.parameters(), lr=0.01, stabilize=10)
 	return optimizer
 
 def main():
@@ -155,28 +153,28 @@ def main():
 			loss.backward()
 			optimizer.step()
 
-			# f1 = f1_score(batch_train_words.cpu().detach().numpy(), img_tranf.cpu().detach().numpy().round(), average='macro')
-			# f1s.append(f1)
-			# avg_f1 = np.average(f1s) # running average
+			f1 = f1_score(batch_train_words.cpu().detach().numpy(), img_tranf.cpu().detach().numpy().round(), average='macro')
+			f1s.append(f1)
+			avg_f1 = np.average(f1s) # running average
 
 			if total_step % args.print_freq == 0:
 				print("Epoch {}, Step {}, Loss {}".format(epoch, j, avg_loss))
-				# print("Epoch {}, Step {}, Loss {}, f1_score {}".format(i, j, avg_loss, avg_f1))
+				print("Epoch {}, Step {}, Loss {}, f1_score {}".format(i, j, avg_loss, avg_f1))
 
 		print('############# Evaluation ##############')
 		model.eval()
-		# train_f1s.append(avg_f1)
+		train_f1s.append(avg_f1)
 		train_losses.append(avg_loss)
 
 		val_img_mat = pm.expmap0(val_img_mat, c=1)
 		img_tranf = model(val_img_mat)
 		loss      = criterion(img_tranf, val_words_embd)
 
-		# pre_recall_f1 = precision_recall_fscore_support(\
-		#     val_words_embd.cpu().detach().numpy(), img_tranf.cpu().detach().numpy().round(), average='macro')
+		pre_recall_f1 = precision_recall_fscore_support(\
+		    val_words_embd.cpu().detach().numpy(), img_tranf.cpu().detach().numpy().round(), average='macro')
 		
-		# if(test_losses != [] and loss.item() < min(test_losses)): 
-		# 	torch.save(model, args.model_path)
+		if(test_losses != [] and loss.item() < min(test_losses)): 
+			torch.save(model, args.model_path)
 
 		torch.cuda.empty_cache()
 
@@ -185,12 +183,12 @@ def main():
 
 		print("Loss {}".format(loss.item()) )
 
-		# print("Loss {}, pre {}, recall {}, f1_score {}".format(loss.item(), pre_recall_f1[0], pre_recall_f1[1], pre_recall_f1[2]))
+		print("Loss {}, pre {}, recall {}, f1_score {}".format(loss.item(), pre_recall_f1[0], pre_recall_f1[1], pre_recall_f1[2]))
 
-		# if pre_recall_f1[2] > best_f1: 
-		# best_f1        = pre_recall_f1[2]
-		# best_recall    = pre_recall_f1[1]
-		# best_precision = pre_recall_f1[0]
+		if pre_recall_f1[2] > best_f1: 
+		best_f1        = pre_recall_f1[2]
+		best_recall    = pre_recall_f1[1]
+		best_precision = pre_recall_f1[0]
 
 		print('#######################################')
 
@@ -219,19 +217,19 @@ def main():
 			plt.grid()
 			plt.savefig(args.loss_path)
 
-			# plt.cla()
-			# plt.title('f1_score')
-			# plt.xlabel('number of training batches seenVal')
-			# plt.ylabel('f1_score')
+			plt.cla()
+			plt.title('f1_score')
+			plt.xlabel('number of training batches seenVal')
+			plt.ylabel('f1_score')
 
-			# plt.plot(counter, train_f1s,'b',label='train')
-			# plt.plot(counter, test_f1s,'r', label='test')
+			plt.plot(counter, train_f1s,'b',label='train')
+			plt.plot(counter, test_f1s,'r', label='test')
 
-			# plt.legend(['Train f1_score', 'Test f1_score'], loc='upper right')
-			# plt.grid()
-			# plt.savefig('./pictures/f1.jpg')
+			plt.legend(['Train f1_score', 'Test f1_score'], loc='upper right')
+			plt.grid()
+			plt.savefig('./pictures/f1.jpg')
 
-	# print("pre {}, recall {}, f1_score {}".format(best_precision, best_recall, best_f1))
+	print("pre {}, recall {}, f1_score {}".format(best_precision, best_recall, best_f1))
 
 	plt.title('Cos_Loss')
 	plt.xlabel('number of training examples seen')
@@ -244,17 +242,17 @@ def main():
 	plt.grid()
 	plt.savefig(args.loss_path)
 
-	# plt.cla()
-	# plt.title('f1_score')
-	# plt.xlabel('number of training batches seenVal')
-	# plt.ylabel('f1_score')
+	plt.cla()
+	plt.title('f1_score')
+	plt.xlabel('number of training batches seenVal')
+	plt.ylabel('f1_score')
 
-	# plt.plot(counter, train_f1s,'b',label='train')
-	# plt.plot(counter, test_f1s,'r', label='test')
+	plt.plot(counter, train_f1s,'b',label='train')
+	plt.plot(counter, test_f1s,'r', label='test')
 	 
-	# plt.legend(['Train f1_score', 'Test f1_score'], loc='upper right')
-	# plt.grid()
-	# plt.savefig('./pictures/f1.jpg')
+	plt.legend(['Train f1_score', 'Test f1_score'], loc='upper right')
+	plt.grid()
+	plt.savefig('./pictures/f1.jpg')
 
 if __name__ == '__main__':
 	main()
