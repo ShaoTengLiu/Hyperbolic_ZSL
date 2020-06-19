@@ -36,7 +36,7 @@ class Image_Transformer(nn.Module):
     def forward(self,x):
         # x = x / (1 + self.para.norm())
         x = self.fc1(x)
-        x = self.mobius_relu(x)
+        # x = self.mobius_relu(x)
         x = self.fc2(x)
         return x
 
