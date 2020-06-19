@@ -169,9 +169,9 @@ def main():
 		print("Loss {}, pre {}, recall {}, f1_score {}".format(loss.item(), pre_recall_f1[0], pre_recall_f1[1], pre_recall_f1[2]))
 
 		if pre_recall_f1[2] > best_f1: 
-		best_f1        = pre_recall_f1[2]
-		best_recall    = pre_recall_f1[1]
-		best_precision = pre_recall_f1[0]
+			best_f1        = pre_recall_f1[2]
+			best_recall    = pre_recall_f1[1]
+			best_precision = pre_recall_f1[0]
 
 		print('#######################################')
 
