@@ -22,8 +22,8 @@ def parse_option():
 
 	parser.add_argument('--model_folder', type=str, default='./results/model/devise')
 	parser.add_argument('--loss_path', type=str, default='./results/loss/loss_test.jpg')
-	parser.add_argument('--train_img_mat_path', type=str, default='../data/CV/Imagenet/all/train/train_image_mat_resnet50.npy')
-	parser.add_argument('--val_img_mat_path', type=str, default='../data/CV/Imagenet/all/val/val_image_mat_resnet50.npy')
+	parser.add_argument('--train_img_mat_path', type=str, default='../data/train/img/train_image_mat_resnet50.npy')
+	parser.add_argument('--val_img_mat_path', type=str, default='../data/val/img/val_image_mat_resnet50.npy')
 	parser.add_argument('--word_model', type=str, default='glove')
 	
 	parser.add_argument('--epochs', type=int, default=240, help='number of training epochs')
@@ -38,32 +38,32 @@ def parse_option():
 
 	# data
 	if opt.word_model == 'glove':
-		opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Eu_version/train_words_embd_glove_300.npy'
-		opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Eu_version/val_words_embd_glove_300.npy'
+		opt.train_words_embd_path = '../data/train/label/Eu_version/train_words_embd_glove_300.npy'
+		opt.val_words_embd_path   = '../data/val/label/Eu_version/val_words_embd_glove_300.npy'
 	elif opt.word_model == 'hier':
-		opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Eu_version/train_words_embd_hier_1000.npy'
-		opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Eu_version/val_words_embd_hier_1000.npy'
+		opt.train_words_embd_path = '../data/train/label/Eu_version/train_words_embd_hier_1000.npy'
+		opt.val_words_embd_path   = '../data/val/label/Eu_version/val_words_embd_hier_1000.npy'
 	elif opt.word_model == 'gh':
-		opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Eu_version/train_words_embd_gh_300+1000.npy'
-		opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Eu_version/val_words_embd_gh_300+1000.npy'	
+		opt.train_words_embd_path = '../data/train/label/Eu_version/train_words_embd_gh_300+1000.npy'
+		opt.val_words_embd_path   = '../data/val/label/Eu_version/val_words_embd_gh_300+1000.npy'	
 	elif opt.word_model == 'ehier':
-		opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Eu_version/train_words_embd_ehier_300.npy'
-		opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Eu_version/val_words_embd_ehier_300.npy'
+		opt.train_words_embd_path = '../data/train/label/Eu_version/train_words_embd_ehier_300.npy'
+		opt.val_words_embd_path   = '../data/val/label/Eu_version/val_words_embd_ehier_300.npy'
 	elif opt.word_model == 'geh':
-		opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Eu_version/train_words_embd_geh_300+300.npy'
-		opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Eu_version/val_words_embd_geh_300+300.npy'
+		opt.train_words_embd_path = '../data/train/label/Eu_version/train_words_embd_geh_300+300.npy'
+		opt.val_words_embd_path   = '../data/val/label/Eu_version/val_words_embd_geh_300+300.npy'
 	else: 
-		opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Hype_version/train_words_embd_poincare_300.npy'
-		opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Hype_version/val_words_embd_poincare_300.npy'
+		opt.train_words_embd_path = '../data/train/label/Hype_version/train_words_embd_poincare_300.npy'
+		opt.val_words_embd_path   = '../data/val/label/Hype_version/val_words_embd_poincare_300.npy'
 
 	if not os.path.isdir(opt.model_folder): 
 		os.makedirs(opt.model_folder)
 	
 	if opt.mode == 'tiny_test':
-	   opt.train_img_mat_path    = '../data/CV/Imagenet/tiny-imagenet-200/train_image_mat_resnet.npy'
-	   opt.train_words_embd_path = '../data/CV/Imagenet/tiny-imagenet-200/train_words_embd.npy'
-	   opt.val_img_mat_path      = '../data/CV/Imagenet/tiny-imagenet-200/val/val_image_mat_resnet.npy'
-	   opt.val_words_embd_path   = '../data/CV/Imagenet/tiny-imagenet-200/val/val_words_embd.npy'
+	   opt.train_img_mat_path    = '../data/train/img/tiny-imagenet-200/train_image_mat_resnet.npy'
+	   opt.train_words_embd_path = '../data/train/label/tiny-imagenet-200/train_words_embd.npy'
+	   opt.val_img_mat_path      = '../data/val/img/tiny-imagenet-200/val/val_image_mat_resnet.npy'
+	   opt.val_words_embd_path   = '../data/val/label/tiny-imagenet-200/val/val_words_embd.npy'
 
 	print('model:%s mode:%s folder:%s loss:%s dimension:%s' %(opt.word_model, opt.mode, opt.model_folder, opt.loss_path, str(opt.dimension)))
 	return opt

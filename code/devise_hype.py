@@ -34,8 +34,8 @@ def parse_option():
 
 	parser.add_argument('--model_folder', type=str, default='./results/model/hype/')
 	parser.add_argument('--loss_path', type=str, default='./results/loss/loss_model.jpg')
-	parser.add_argument('--train_img_mat_path', type=str, default='../data/CV/Imagenet/all/train/train_image_mat_resnet50.npy')
-	parser.add_argument('--val_img_mat_path', type=str, default='../data/CV/Imagenet/all/val/val_image_mat_resnet50.npy')
+	parser.add_argument('--train_img_mat_path', type=str, default='../data/train/img/train_image_mat_resnet50.npy')
+	parser.add_argument('--val_img_mat_path', type=str, default='../data/val/img/val_image_mat_resnet50.npy')
 	parser.add_argument('--word_model', type=str, default='poincare')
 	
 	parser.add_argument('--epochs', type=int, default=240, help='number of training epochs')
@@ -57,17 +57,17 @@ def parse_option():
 		os.makedirs(opt.model_folder)
 	# data
 	if opt.word_model == 'poincare': # TODO 1.get more pretrained embedding; 2.this code should be designed as multi-functional(pe, pg, pepg)
-	   opt.train_words_embd_path = '../data/CV/Imagenet/all/train/Hype_version/train_words_embd_pe_300.npy' # TODO the name should be simple in the future
-	   opt.val_words_embd_path   = '../data/CV/Imagenet/all/val/Hype_version/val_words_embd_pe_300.npy'
+	   opt.train_words_embd_path = '../data/train/label/Hype_version/train_words_embd_pe_300.npy'
+	   opt.val_words_embd_path   = '../data/val/label/Hype_version/val_words_embd_pe_300.npy'
 	else: 
 		opt.train_words_embd_path = ''
 		opt.val_words_embd_path   = ''
 	
 	if opt.mode == 'tiny_test':
-	   opt.train_img_mat_path    = '../data/CV/Imagenet/tiny-imagenet-200/train_embed/train_image_mat_resnet.npy'
-	   opt.train_words_embd_path = '../data/CV/Imagenet/tiny-imagenet-200/train_embed/Hype_version/train_words_pe_dim.npy'
-	   opt.val_img_mat_path      = '../data/CV/Imagenet/tiny-imagenet-200/val_embed/val_image_mat_resnet.npy'
-	   opt.val_words_embd_path   = '../data/CV/Imagenet/tiny-imagenet-200/val_embed/Hype_version/val_words_pe_dim.npy'
+	   opt.train_img_mat_path    = '../data/train/img/tiny-imagenet-200/train_embed/train_image_mat_resnet.npy'
+	   opt.train_words_embd_path = '../data/train/label/tiny-imagenet-200/train_embed/Hype_version/train_words_pe_dim.npy'
+	   opt.val_img_mat_path      = '../data/val/img/tiny-imagenet-200/val_embed/val_image_mat_resnet.npy'
+	   opt.val_words_embd_path   = '../data/val/label/tiny-imagenet-200/val_embed/Hype_version/val_words_pe_dim.npy'
 	   opt.train_words_embd_path = opt.train_words_embd_path.replace('dim', str(opt.dimension))
 	   opt.val_words_embd_path = opt.val_words_embd_path.replace('dim', str(opt.dimension))
 	
@@ -186,9 +186,9 @@ def main():
 		print("Loss {}, pre {}, recall {}, f1_score {}".format(loss.item(), pre_recall_f1[0], pre_recall_f1[1], pre_recall_f1[2]))
 
 		if pre_recall_f1[2] > best_f1: 
-		best_f1        = pre_recall_f1[2]
-		best_recall    = pre_recall_f1[1]
-		best_precision = pre_recall_f1[0]
+			best_f1        = pre_recall_f1[2]
+			best_recall    = pre_recall_f1[1]
+			best_precision = pre_recall_f1[0]
 
 		print('#######################################')
 
