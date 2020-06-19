@@ -30,7 +30,7 @@ class Image_Transformer(nn.Module):
     def __init__(self, dimension):
         super(Image_Transformer,self).__init__()
         self.fc1 = MobiusLinear(2048, 1024)
-        self.mobius_relu = pm.mobius_fn_apply(F.relu, x)
+        # self.mobius_relu = lambda x:pm.mobius_fn_apply(F.relu, x)
         self.fc2 = MobiusLinear(1024, dimension)
 
     def forward(self,x):
