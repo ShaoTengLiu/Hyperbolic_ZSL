@@ -7,7 +7,7 @@
 # fix the versions of numpy to force the use of numpy and scipy to use the whl
 # of the rackspace folder instead of trying to install from more recent
 # source tarball published on PyPI
-numpy==1.11.3
+numpy==1.21.0
 scipy==0.18.1
 cython
 six >= 1.5.0
